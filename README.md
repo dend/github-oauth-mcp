@@ -1,13 +1,30 @@
-# 🔒 Minimal Entra ID-authenticated MCP Server
+# 🔒 Minimal GitHub OAuth-enabled MCP Server
 
-Minimal server showing how to implement Entra ID authentication with MCP and HTTP+SSE transport. Unlike the previous server implementation, this relies on a confidential client living inside the MCP server, and then using "session mapping" to make sure that the client gets a session assignment through, what looks like, a JWT token (since we can't use cookies).
+Minimal MCP server showing how to potentially implement GitHub OAuth with an MCP server.
 
 >[!WARNING]
->This is not intended for production use. If you are to adopt any of the practices in this implementation, ensure that you are implementing proper caching and secure token/credential handling practices.
+>This is **not intended for production use**. If you are to adopt any of the practices in this implementation, ensure that you are implementing proper caching and secure token/credential handling practices.
+
+## GitHub application registration
+
+Prior to using this MCP server, make sure that you have a **GitHub App** you can use for testing. You can register one [in your GitHub settings](https://github.com/settings/apps).
+
+![Registering an application in GitHub](media/register-new-app.gif)
+
+Once the app is registered, make sure to generate a new secret.
+
+![Generate a new secret for your GitHub application](media/generate-new-secret.webp)
+
+With the client ID and secret handy, create a new `.env` file in the root of this project, and add:
+
+```env
+GITHUB_CLIENT_ID=YOUR_CLIENT_ID
+GITHUB_CLIENT_SECRET=YOUR_SECRET
+```
 
 ## Run server
 
-```
+```bash
 npm install
 npm run build
 npm run start
